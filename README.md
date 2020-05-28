@@ -1,8 +1,7 @@
 # audit-prompt
 
 ## Setup
-Unzip the audit-prompt file and cd into it's top directory.  
-Run the following comamnds:  
+ Run the following comamnds to get started:  
 
 ```
 $ python3 -m venv /tmp/audit-prompt  
