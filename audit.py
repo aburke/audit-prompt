@@ -14,6 +14,9 @@ from dateutil.parser import parse
 
 
 class MissingFieldException(Exception):
+    '''
+    Exception for missing field exception
+    '''
     pass
 
 
@@ -122,11 +125,10 @@ class Auditor(object):
     def get_traversal_files(self) -> Tuple:
         '''
         Generate 3 items
-        main file - file the is closest to the process date
+        main file - file that is closest to the process date
         before files - files (in decending order) that are before the process date
         after files - files that are after the process date
         '''
-        items_to_traverse = []
         audit_files = self.get_audit_files()
         min_diff = float('inf')
         main_idx = 0
@@ -138,7 +140,7 @@ class Auditor(object):
                 min_diff = date_diff
                 main_idx = i
             else:
-                break  # because audit files are sorted no need to continue search if min_diff is greater than date_diff
+                break  # because audit files are sorted no need to continue search if date_diff is greater than min_diff
 
         main_file = audit_files[main_idx]
         before_files = sorted(audit_files[:main_idx], reverse=True)
@@ -193,13 +195,14 @@ class S3Auditor(Auditor):
         return sorted(c['Key'] for c in response['Contents'] if c['Key'].endswith('.jsonl.gz'))
 
 
-def replay(fields: List[str], source_folder: str, process_date_str: str):
+def replay(fields: List[str], source_folder: str, process_date_str: str) -> Dict:
     ''' Returns the state of one or more top level fields at a given moment in time '''
     process_date = parse(process_date_str)
-    if source_folder.startswith('s3'):
-        auditor = S3Auditor(source_folder, process_date)
-    else:
+
+    if not source_folder.startswith('s3'):
         auditor = Auditor(source_folder, process_date)
+    else:
+        auditor = S3Auditor(source_folder, process_date)
 
     state = {}
     for fld in fields:

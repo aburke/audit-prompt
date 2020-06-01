@@ -64,7 +64,7 @@ class TestAuditor(unittest.TestCase):
         self.auditor.get_audit_files.return_value = audit_files
 
         try:
-            state = self.auditor.get_state('ambientTemp')
+            self.auditor.get_state('ambientTemp')
         except audit.MissingFieldException:
             failure_caught = True
 
@@ -85,7 +85,7 @@ class TestAuditor(unittest.TestCase):
         self.auditor.get_audit_files.return_value = audit_files
 
         try:
-            state = self.auditor.get_state('ambientTemp')
+            self.auditor.get_state('ambientTemp')
         except audit.MissingFieldException:
             failure_caught = True
 
@@ -108,11 +108,11 @@ class TestAuditor(unittest.TestCase):
         self.auditor.get_audit_files.return_value = audit_files
         state = self.auditor.get_state('ambientTemp')
         self.assertEqual(81.0, state)
-        
+
 
 class TestS3Auditor(unittest.TestCase):
     '''
-    Test class for s3 auditor specific scenarios 
+    Test class for s3 auditor specific scenarios
     '''
 
     def setUp(self):

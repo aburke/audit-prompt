@@ -3,7 +3,6 @@ Command line module
 '''
 from argparse import ArgumentParser
 
-import sys
 import audit
 import logging
 
@@ -19,7 +18,7 @@ if __name__ == "__main__":
 
     parser = ArgumentParser(
         prog="replay",
-        description="Prints the state of one ore more top level fields"
+        description="Prints the state of one or more top level fields"
     )
 
     parser.add_argument(
@@ -39,6 +38,6 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    
+
     audit_details = audit.replay(args.field, args.source_path, args.date_str)
     print(audit_details)
