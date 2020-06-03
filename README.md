@@ -1,13 +1,13 @@
 # audit-prompt
 
 ## Setup
- Run the following comamnds to get started:  
+ Run the following comamnds under the project path to get started:  
 
 ```
-$ python3 -m venv /tmp/audit-prompt  
-$ . /tmp/audit-prompt/bin/activate
-$ pip3 install --upgrade pip
-$ pip3 install -r requirements.txt
+$ pip3 install pipenv
+$ export PIPENV_IGNORE_VIRTUALENVS=1
+$ pipenv install 
+$ pipenv shell
 $ python3 replay.py -h
 ```
 
