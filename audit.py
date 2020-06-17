@@ -4,13 +4,14 @@ Module provides tools for extracting device data
 import os
 import json
 import logging
-import boto3
 
 from datetime import datetime
 from typing import Iterator, Dict, Optional, List, Tuple
 from io import BytesIO
 from gzip import GzipFile
 from dateutil.parser import parse
+
+import boto3  # type: ignore
 
 
 class MissingFieldException(Exception):
